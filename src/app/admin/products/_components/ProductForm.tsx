@@ -26,7 +26,6 @@ const ProductForm = ({ product }: { product?: Product | null }) => {
     }
   };
 
-  console.log("iamge paht ", product?.imagePath);
   return (
     <form action={action} className="space-y-8">
       <div className="space-y-2">
@@ -84,9 +83,8 @@ const ProductForm = ({ product }: { product?: Product | null }) => {
             <Image
               src={image}
               alt="Product Image"
-              layout="fill"
-              objectFit="cover"
-              className="rounded-xl w-fit"
+              fill
+              className="rounded-xl w-fit object-cover"
             />
           </div>
         )}

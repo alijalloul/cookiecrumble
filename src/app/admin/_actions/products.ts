@@ -2,6 +2,7 @@
 
 import db from "@/db/db";
 import fs from "fs/promises";
+import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -42,6 +43,9 @@ export const addProduct = async (prevState: unknown, formData: FormData) => {
     },
   });
 
+  revalidatePath("/");
+  revalidatePath("/products");
+
   redirect("/admin/products");
 };
 
@@ -50,19 +54,24 @@ export const toggleProductAvailability = async (
   isAvailableForPurchase: boolean
 ) => {
   await db.product.update({ where: { id }, data: { isAvailableForPurchase } });
+
+  revalidatePath("/");
+  revalidatePath("/products");
 };
 
 export const deleteProduct = async (id: string, orders: boolean) => {
   if (orders) {
     console.error("Product has orders");
   }
-  const data = await db.product.delete({ where: { id } });
+  try {
+    const data = await db.product.delete({ where: { id } });
+    await fs.unlink(`public/${data.imagePath}`);
 
-  if (data === null) {
-    return notFound();
+    revalidatePath("/");
+    revalidatePath("/products");
+  } catch (error) {
+    console.log(error);
   }
-
-  await fs.unlink(data.imagePath);
 };
 
 export const editProduct = async (
@@ -102,6 +111,9 @@ export const editProduct = async (
       imagePath,
     },
   });
+
+  revalidatePath("/");
+  revalidatePath("/products");
 
   redirect("/admin/products");
 };

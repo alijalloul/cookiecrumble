@@ -65,8 +65,8 @@ const AdminDashboard = async () => {
       />
       <DashboardCard
         title="Active Products"
-        subtitle={`${productData.activeCount} Inactive`}
-        body={productData.inactiveCount.toString()}
+        subtitle={`${productData.inactiveCount} Inactive`}
+        body={productData.activeCount.toString()}
       />
     </div>
   );

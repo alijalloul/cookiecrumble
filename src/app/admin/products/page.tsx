@@ -88,12 +88,6 @@ const ProductsTable = async () => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent>
-                  <DropdownMenuItem>
-                    <a download href={`/admin/products/${product.id}/download`}>
-                      Donwload
-                    </a>
-                  </DropdownMenuItem>
-
                   <DropdownMenuItem asChild>
                     <Link href={`/admin/products/${product.id}/edit`}>
                       Edit
