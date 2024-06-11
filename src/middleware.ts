@@ -27,7 +27,7 @@ async function userAuthMiddleware(req: NextRequest) {
     return;
   }
 
-  if (req.url.includes("/login") && verifiedToken) {
+  if (req.url.includes("/auth") && verifiedToken) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
