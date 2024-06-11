@@ -31,11 +31,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.13.0
+ * Prisma Client JS version: 5.15.0
  * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
  */
 Prisma.prismaVersion = {
-  client: "5.13.0",
+  client: "5.15.0",
   engine: "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48"
 }
 
@@ -167,16 +167,17 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "5.13.0",
+  "clientVersion": "5.15.0",
   "engineVersion": "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -185,8 +186,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"POSTGRES_PRISMA_URL\")\n}\n\nmodel Product {\n  id                     String   @id @default(uuid())\n  name                   String\n  priceInCents           Int\n  imagePath              String\n  description            String\n  isAvailableForPurchase Boolean\n  createdAt              DateTime @default(now())\n  updatedAt              DateTime @updatedAt\n\n  orders ProductOrder[]\n}\n\nmodel User {\n  id          String   @id @default(uuid())\n  email       String   @unique\n  password    String\n  phonenumber String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  // orders Order[]\n}\n\nmodel Order {\n  id               String   @id @default(uuid())\n  pricePaidInCents Int\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n\n  userId             String\n  productsIdQuantity String\n\n  // user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)\n  products ProductOrder[]\n}\n\nmodel ProductOrder {\n  productId String\n  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)\n\n  orderId String\n  order   Order  @relation(fields: [orderId], references: [id])\n\n  @@id([productId, orderId])\n}\n",
-  "inlineSchemaHash": "0a855e5b7dffe668caf40fe7d7145e0665e3b3240a2cbf1a430ddb78981d9ccf",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n\n  url = env(\"POSTGRES_PRISMA_URL\") // uses connection pooling\n\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\") // uses a direct connection\n}\n\nmodel Product {\n  id                     String   @id @default(uuid())\n  name                   String\n  priceInCents           Int\n  imagePath              String\n  description            String\n  isAvailableForPurchase Boolean\n  createdAt              DateTime @default(now())\n  updatedAt              DateTime @updatedAt\n\n  orders ProductOrder[]\n}\n\nmodel User {\n  id          String   @id @default(uuid())\n  email       String   @unique\n  password    String\n  phonenumber String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  // orders Order[]\n}\n\nmodel Order {\n  id               String   @id @default(uuid())\n  pricePaidInCents Int\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n\n  userId             String\n  productsIdQuantity String\n\n  // user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)\n  products ProductOrder[]\n}\n\nmodel ProductOrder {\n  productId String\n  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)\n\n  orderId String\n  order   Order  @relation(fields: [orderId], references: [id])\n\n  @@id([productId, orderId])\n}\n",
+  "inlineSchemaHash": "020b8e84a9888304bbf85d3976a42f23be45147fa9aeca388994f67bc9389af7",
   "copyEngine": true
 }
 
