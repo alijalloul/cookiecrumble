@@ -150,7 +150,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\User\\Desktop\\admin\\prisma\\prisma\\client",
+      "value": "C:\\Users\\User\\Desktop\\admin\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -186,8 +186,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./prisma/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n\n  url = env(\"POSTGRES_PRISMA_URL\") // uses connection pooling\n\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\") // uses a direct connection\n}\n\nmodel Product {\n  id                     String   @id @default(uuid())\n  name                   String\n  priceInCents           Int\n  imagePath              String\n  description            String\n  isAvailableForPurchase Boolean\n  createdAt              DateTime @default(now())\n  updatedAt              DateTime @updatedAt\n\n  orders ProductOrder[]\n}\n\nmodel User {\n  id          String   @id @default(uuid())\n  email       String   @unique\n  password    String\n  phonenumber String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  // orders Order[]\n}\n\nmodel Order {\n  id               String   @id @default(uuid())\n  pricePaidInCents Int\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n\n  userId             String\n  productsIdQuantity String\n\n  // user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)\n  products ProductOrder[]\n}\n\nmodel ProductOrder {\n  productId String\n  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)\n\n  orderId String\n  order   Order  @relation(fields: [orderId], references: [id])\n\n  @@id([productId, orderId])\n}\n",
-  "inlineSchemaHash": "e61922ddd14efd38b607448e1509df4da29ac08a9539f5164d300e80b39dd90e",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n\n  url = env(\"POSTGRES_PRISMA_URL\") // uses connection pooling\n\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\") // uses a direct connection\n}\n\nmodel Product {\n  id                     String   @id @default(uuid())\n  name                   String\n  priceInCents           Int\n  imagePath              String\n  description            String\n  isAvailableForPurchase Boolean\n  createdAt              DateTime @default(now())\n  updatedAt              DateTime @updatedAt\n\n  orders ProductOrder[]\n}\n\nmodel User {\n  id          String   @id @default(uuid())\n  email       String   @unique\n  password    String\n  phonenumber String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  // orders Order[]\n}\n\nmodel Order {\n  id               String   @id @default(uuid())\n  pricePaidInCents Int\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n\n  userId             String\n  productsIdQuantity String\n\n  // user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)\n  products ProductOrder[]\n}\n\nmodel ProductOrder {\n  productId String\n  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)\n\n  orderId String\n  order   Order  @relation(fields: [orderId], references: [id])\n\n  @@id([productId, orderId])\n}\n",
+  "inlineSchemaHash": "020b8e84a9888304bbf85d3976a42f23be45147fa9aeca388994f67bc9389af7",
   "copyEngine": true
 }
 
@@ -196,8 +196,8 @@ const fs = require('fs')
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   const alternativePaths = [
-    "prisma/prisma/client",
-    "prisma/client",
+    "prisma/generated/client",
+    "generated/client",
   ]
   
   const alternativePath = alternativePaths.find((altPath) => {
@@ -226,7 +226,7 @@ Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "prisma/prisma/client/query_engine-windows.dll.node")
+path.join(process.cwd(), "prisma/generated/client/query_engine-windows.dll.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "prisma/prisma/client/schema.prisma")
+path.join(process.cwd(), "prisma/generated/client/schema.prisma")
