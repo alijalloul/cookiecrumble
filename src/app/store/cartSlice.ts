@@ -4,19 +4,19 @@ import { CartState, CartItemType } from "./types";
 
 const initialState: CartState = {
   cart: [
-    // {
-    //   "id": "3a4cb4b6-d6cc-4230-aafe-ec09bba9e6bb",
-    //   "name": "Red Fruit Puff Pastry",
-    //   "priceInCents": 1600,
-    //   "imagePath":
-    //     "/images/7c28ad2f-8414-4c10-a9bf-910b3aa42a9e-Gemini_Generated_Image_6y2c4a6y2c4a6y2c.jpg",
-    //   "description":
-    //     "Buttery puff pastry filled with a variety of red fruits topped with some whipped cream",
-    //   "isAvailableForPurchase": true,
-    //   "createdAt": new Date("2024-05-18T13:54:04.321Z"),
-    //   "updatedAt": new Date("2024-05-18T13:54:11.882Z"),
-    //   "quantity": 1,
-    // },
+    {
+      "id": "3a4cb4b6-d6cc-4230-aafe-ec09bba9e6bb",
+      "name": "Red Fruit Puff Pastry",
+      "priceInCents": 1600,
+      "imagePath":
+        "/images/7c28ad2f-8414-4c10-a9bf-910b3aa42a9e-Gemini_Generated_Image_6y2c4a6y2c4a6y2c.jpg",
+      "description":
+        "Buttery puff pastry filled with a variety of red fruits topped with some whipped cream",
+      "isAvailableForPurchase": true,
+      "createdAt": new Date("2024-05-18T13:54:04.321Z"),
+      "updatedAt": new Date("2024-05-18T13:54:11.882Z"),
+      "quantity": 1,
+    },
     // {
     //   "id": "3c5faa62-0554-414b-8b88-8d6b9eb1eab4",
     //   "name": "Key Lime Pie",
@@ -54,18 +54,18 @@ const initialState: CartState = {
     //   "updatedAt": new Date("2024-05-18T13:54:08.543Z"),
     //   "quantity": 3,
     // },
-    // {
-    //   "id": "3d805cbd-16a4-49b4-8a7c-8a11f2ab2fa4",
-    //   "name": "Chocolate Chip Cookie",
-    //   "priceInCents": 150,
-    //   "imagePath":
-    //     "/images/7990086b-1861-4c84-b8c5-9c39952a6a35-Gemini_Generated_Image_wl2wxowl2wxowl2w.jpg",
-    //   "description": "Gooey chocolate chip cookies. (min order 6 pieces)",
-    //   "isAvailableForPurchase": true,
-    //   "createdAt": new Date("2024-05-21T12:27:29.904Z"),
-    //   "updatedAt": new Date("2024-05-21T12:27:35.412Z"),
-    //   "quantity": 2,
-    // },
+    {
+      "id": "3d805cbd-16a4-49b4-8a7c-8a11f2ab2fa4",
+      "name": "Chocolate Chip Cookie",
+      "priceInCents": 150,
+      "imagePath":
+        "/images/7990086b-1861-4c84-b8c5-9c39952a6a35-Gemini_Generated_Image_wl2wxowl2wxowl2w.jpg",
+      "description": "Gooey chocolate chip cookies. (min order 6 pieces)",
+      "isAvailableForPurchase": true,
+      "createdAt": new Date("2024-05-21T12:27:29.904Z"),
+      "updatedAt": new Date("2024-05-21T12:27:35.412Z"),
+      "quantity": 2,
+    },
     // {
     //   "id": "9f955556-2552-4607-97dc-f4e51b1173db",
     //   "name": "Artisan Bread",

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -15,17 +14,17 @@ import { Product } from "@prisma/client";
 
 export const ProductCardBeta = ({ product }: { product: Product }) => {
   return (
-    <Card className="flex flex-col">
+    <Card key={product.id} className="flex flex-col">
       <div className=" text-center relative flex justify-center items-center w-full aspect-[5/6] overflow-hidden group">
         <Link
           className="relative h-full w-full"
           href={`/products/${product.id}`}
         >
           <Image
+            sizes="800px"
             src={product.imagePath}
             alt={product.name}
             fill
-            sizes="80px"
             className="object-cover hover:brightness-[.6] hover:scale-110 transition-all duration-400"
           />
         </Link>
@@ -58,12 +57,9 @@ export const ProductCardSkeletonBeta = () => {
     <Card className=" overflow-hidden flex flex-col animate-pulse">
       <div className="relative w-full aspect-[5/6] bg-gray-300"></div>
       <CardHeader>
-        <CardTitle>
-          <div className="w-3/4 h-6 rounded-full bg-gray-300"></div>
-        </CardTitle>
-        <CardDescription>
-          <div className="w-1/2 h-4 rounded-full bg-gray-300"></div>
-        </CardDescription>
+        <div className="w-3/4 h-6 rounded-full bg-gray-300"></div>
+
+        <div className="w-1/2 h-4 rounded-full bg-gray-300"></div>
       </CardHeader>
 
       <CardFooter>

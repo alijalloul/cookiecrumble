@@ -2,25 +2,64 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ComponentProps, ReactNode, useState } from "react";
+import { ComponentProps, ReactNode, useEffect, useState } from "react";
 
 import { cn } from "../../../lib/utils";
-import { Button } from "@/components/ui/button";
-import { AlignRight, X } from "lucide-react";
+import { AlignRight } from "lucide-react";
 import CartSlide from "./CartSlide";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-export const Nav = ({ children }: { children: ReactNode }) => {
+const Nav = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 768);
+    }
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <header className="mx-20 my-8 flex justify-between items-center">
-      <div>
-        <h1>COOKIE CRUMBLE</h1>
-      </div>
+    <header className="relative z-10 w-full py-8 px-20 flex justify-between items-center min-sm:px-10">
+      <Link href="/">COOKIE CRUMBLE</Link>
+      {isMobile ? (
+        <MobileNav>
+          <MobileNavLink href="/">Home</MobileNavLink>
+          <MobileNavLink href="/products">Products</MobileNavLink>
+          <MobileNavLink href="/contact">Contact Us</MobileNavLink>
+        </MobileNav>
+      ) : (
+        <NormalNav>
+          <NavLink href="/">Home</NavLink>
+          <NavLink href="/products">Products</NavLink>
+          <NavLink href="/contact">Contact Us</NavLink>
+        </NormalNav>
+      )}
+    </header>
+  );
+};
+export default Nav;
 
+export const NormalNav = ({ children }: { children: ReactNode }) => {
+  return (
+    <>
       <nav className="text-center flex justify-center px-4">{children}</nav>
 
       <CartSlide />
-    </header>
+    </>
   );
 };
 
@@ -40,14 +79,27 @@ export const NavLink = (
   );
 };
 
-export const MobileNav = ({ children }: { children: ReactNode }) => {
-  const [toggle, setToggle] = useState(false);
-  return (
-    <header className="relative z-10 mx-20 my-8 flex justify-between items-center min-sm:mx-10">
-      <div>
-        <h1>COOKIE CRUMBLE</h1>
-      </div>
+export const MobileNavLink = (
+  props: Omit<ComponentProps<typeof Link>, "className">
+) => {
+  const pathname = usePathname();
 
+  return (
+    <SheetClose
+      asChild
+      className={cn(
+        "p-4",
+        pathname === props.href && "border-b-2 border-black"
+      )}
+    >
+      <Link {...props} />
+    </SheetClose>
+  );
+};
+
+export const MobileNav = ({ children }: { children: ReactNode }) => {
+  return (
+    <>
       <div className="flex space-x-3">
         <CartSlide />
 
@@ -63,6 +115,6 @@ export const MobileNav = ({ children }: { children: ReactNode }) => {
           </SheetContent>
         </Sheet>
       </div>
-    </header>
+    </>
   );
 };

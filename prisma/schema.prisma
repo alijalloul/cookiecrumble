@@ -1,13 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
 model Product {
@@ -16,20 +13,22 @@ model Product {
   priceInCents           Int
   imagePath              String
   description            String
-  isAvailableForPurchase Boolean  @default(true)
+  isAvailableForPurchase Boolean
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 
-  orders Order[]
+  orders ProductOrder[]
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  phonenumber String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  orders Order[]
+  // orders Order[]
 }
 
 model Order {
@@ -38,9 +37,19 @@ model Order {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
-  userId    String
-  productId String
+  userId             String
+  productsIdQuantity String
 
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  // user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products ProductOrder[]
+}
+
+model ProductOrder {
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id])
+
+  @@id([productId, orderId])
 }

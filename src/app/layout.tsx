@@ -14,9 +14,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <StoreProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body className={cn(" font-sans antialiased", fontSans.variable)}>
+      <html lang="en" suppressHydrationWarning={true} className="h-full">
+        <body
+          className={cn(
+            " font-sans antialiased h-full flex flex-col",
+            fontSans.variable
+          )}
+        >
           {children}
         </body>
       </html>

@@ -49,7 +49,7 @@ const CartSlide = () => {
           <div className="w-full flex flex-col flex-grow overflow-auto justify-center">
             <div className="pr-5 flex flex-col flex-grow overflow-y-auto scrollbar-thin">
               {cartItems.map((item) => (
-                <CartItem item={item} />
+                <CartItem key={item.id} item={item} />
               ))}
             </div>
 
@@ -88,6 +88,7 @@ const CartItem = ({ item }: { item: CartItemType }) => {
               src={item.imagePath}
               alt={item.id}
               fill
+              sizes="800px"
               className="object-cover"
             />
           </div>

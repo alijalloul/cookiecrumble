@@ -8,23 +8,27 @@ import {
 
 const page = () => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <Suspense
-        fallback={
-          <>
-            <ProductCardSkeletonBeta />
-            <ProductCardSkeletonBeta />
-            <ProductCardSkeletonBeta />
-            <ProductCardSkeletonBeta />
-            <ProductCardSkeletonBeta />
-            <ProductCardSkeletonBeta />
-            <ProductCardSkeletonBeta />
-            <ProductCardSkeletonBeta />
-          </>
-        }
-      >
-        <ProductSuspense />
-      </Suspense>
+    <div className="space-y-2">
+      <h2 className="text-3xl font-bold">&nbsp;</h2>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <Suspense
+          fallback={
+            <>
+              <ProductCardSkeletonBeta />
+              <ProductCardSkeletonBeta />
+              <ProductCardSkeletonBeta />
+              <ProductCardSkeletonBeta />
+              <ProductCardSkeletonBeta />
+              <ProductCardSkeletonBeta />
+              <ProductCardSkeletonBeta />
+              <ProductCardSkeletonBeta />
+            </>
+          }
+        >
+          <ProductSuspense />
+        </Suspense>
+      </div>
     </div>
   );
 };
