@@ -53,6 +53,16 @@ const Authentication = () => {
     });
   }
 
+  async function handleLogIn() {
+    const data = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+  }
+
   return (
     <div className="w-full h-full flex justify-center items-center">
       <Tabs defaultValue="signup" className="w-[400px]">
@@ -72,7 +82,7 @@ const Authentication = () => {
                 <Input
                   type="email"
                   id="email"
-                  placeholder="cookies.crumble@gmail.com"
+                  placeholder="la.patisserie@gmail.com"
                   required
                   onChange={handleChange}
                 />
@@ -177,7 +187,7 @@ const Authentication = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Log In</Button>
+              <Button onClick={handleLogIn}>Log In</Button>
             </CardFooter>
           </Card>
         </TabsContent>

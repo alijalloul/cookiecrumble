@@ -13,6 +13,8 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 
 const Nav = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -34,7 +36,7 @@ const Nav = () => {
 
   return (
     <header className="relative z-10 w-full py-8 px-20 flex justify-between items-center min-sm:px-10">
-      <Link href="/">COOKIE CRUMBLE</Link>
+      <Link href="/">La Patisserie</Link>
       {isMobile ? (
         <MobileNav>
           <MobileNavLink href="/">Home</MobileNavLink>
@@ -58,7 +60,13 @@ export const NormalNav = ({ children }: { children: ReactNode }) => {
     <>
       <nav className="text-center flex justify-center px-4">{children}</nav>
 
-      <CartSlide />
+      <div className="flex justify-center items-center space-x-5">
+        <CartSlide />
+
+        <Button variant="outline" onClick={() => signOut()}>
+          Log Out
+        </Button>
+      </div>
     </>
   );
 };

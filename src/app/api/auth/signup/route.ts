@@ -1,5 +1,8 @@
+import jwt from "jsonwebtoken";
 import db from "@/db/db";
 import { NextResponse } from "next/server";
+
+const secret = process.env.JWT_SECRET as string;
 
 export async function POST(req: any) {
   const { email, password, phonenumber } = await req.json();

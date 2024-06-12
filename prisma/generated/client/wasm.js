@@ -136,7 +136,8 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   phonenumber: 'phonenumber',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  verified: 'verified'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
@@ -151,6 +152,13 @@ exports.Prisma.OrderScalarFieldEnum = {
 exports.Prisma.ProductOrderScalarFieldEnum = {
   productId: 'productId',
   orderId: 'orderId'
+};
+
+exports.Prisma.VerificationTokenScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token',
+  expires: 'expires'
 };
 
 exports.Prisma.SortOrder = {
@@ -168,7 +176,8 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   User: 'User',
   Order: 'Order',
-  ProductOrder: 'ProductOrder'
+  ProductOrder: 'ProductOrder',
+  VerificationToken: 'VerificationToken'
 };
 
 /**
