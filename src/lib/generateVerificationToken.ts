@@ -4,7 +4,6 @@ import { v4 } from "uuid";
 
 export async function generateVerificationToken(email: string) {
   const token = v4();
-
   const expires = new Date(new Date().getTime() + 3600 * 1000);
   const existingToken = await getVerificationTokenByEmail(email);
 
